@@ -47,6 +47,7 @@ interface Opts {
   json: boolean;
   inlineFonts: boolean;
   removeSelectors: string | null;
+  click: string | null;
 }
 
 interface Stats {
@@ -84,6 +85,7 @@ function parseArgs(): Opts {
     json: false,
     inlineFonts: false,
     removeSelectors: null,
+    click: null,
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -126,6 +128,9 @@ function parseArgs(): Opts {
         break;
       case '--remove-selectors':
         opts.removeSelectors = args[++i];
+        break;
+      case '--click':
+        opts.click = args[++i];
         break;
       case '--help':
         console.log(`
@@ -307,6 +312,37 @@ async function snapshot(opts: Opts): Promise<void> {
     if (opts.wait > 0) {
       console.log(`⏳ Waiting ${opts.wait}ms for rendering to settle...`);
       await new Promise((r) => setTimeout(r, opts.wait));
+    }
+
+    // Perform click interaction if specified
+    if (opts.click) {
+      console.log(`🖱️ Clicking element "${opts.click}"...`);
+      try {
+        let element = await page.$(opts.click);
+        if (!element) {
+          // Search in child frames recursively!
+          for (const frame of page.frames()) {
+            const childElement = await frame.$(opts.click);
+            if (childElement) {
+              element = childElement;
+              console.log(`   Found element inside child frame: ${frame.url()}`);
+              break;
+            }
+          }
+        }
+
+        if (element) {
+          await element.click();
+          // wait an extra 2 seconds for animation or modal loading to settle
+          console.log(`   Click succeeded! Waiting 2000ms for click action to settle...`);
+          await new Promise((r) => setTimeout(r, 2000));
+        } else {
+          throw new Error(`Selector "${opts.click}" not found in main document or child frames.`);
+        }
+      } catch (clickErr: any) {
+        console.error(`⚠️ Click action failed:`, clickErr);
+        stats.warnings.push(`Click action failed: ${clickErr.message || clickErr}`);
+      }
     }
 
     // ----- Pre-processing options -----
@@ -571,6 +607,16 @@ async function snapshot(opts: Opts): Promise<void> {
 
                 const wrapper = document.createElement('div');
                 wrapper.className = 'ac-iframe-inlined-wrapper';
+
+                // Apply child body's classes and attributes to same-origin wrapper
+                for (const attr of Array.from(doc.body.attributes)) {
+                  if (attr.name === 'class') {
+                    wrapper.classList.add(...attr.value.split(/\s+/).filter(Boolean));
+                  } else if (attr.name !== 'style') {
+                    wrapper.setAttribute(attr.name, attr.value);
+                  }
+                }
+
                 wrapper.style.position = 'absolute';
                 wrapper.style.top = '0';
                 wrapper.style.left = '0';
@@ -628,6 +674,27 @@ async function snapshot(opts: Opts): Promise<void> {
             document.querySelectorAll('img[srcset]').forEach(img => resolveAttr(img, 'srcset'));
             document.querySelectorAll('source[srcset]').forEach(src => resolveAttr(src, 'srcset'));
             document.querySelectorAll('link[rel="stylesheet"]').forEach(link => resolveAttr(link, 'href'));
+
+            // Resolve relative url() references in inline <style> tags
+            document.querySelectorAll('style').forEach((styleEl) => {
+              if (styleEl.textContent) {
+                styleEl.textContent = styleEl.textContent.replace(/url\(['"]?([^'")\s]+)['"]?\)/gi, (match, url) => {
+                  if (
+                    url.startsWith('data:') ||
+                    url.startsWith('http:') ||
+                    url.startsWith('https:') ||
+                    url.startsWith('//')
+                  ) {
+                    return match;
+                  }
+                  try {
+                    return `url('${new URL(url, base).href}')`;
+                  } catch {
+                    return match;
+                  }
+                });
+              }
+            });
           }, frameUrl);
 
           const frameStyles = await frame.evaluate(() => {
@@ -638,15 +705,36 @@ async function snapshot(opts: Opts): Promise<void> {
           });
 
           const frameBodyHtml = await frame.evaluate(() => document.body.innerHTML);
+          const frameBodyAttrs = await frame.evaluate(() => {
+            const attrs: Record<string, string> = {};
+            for (const attr of Array.from(document.body.attributes)) {
+              attrs[attr.name] = attr.value;
+            }
+            return attrs;
+          });
+          const frameHtmlAttrs = await frame.evaluate(() => {
+            const attrs: Record<string, string> = {};
+            for (const attr of Array.from(document.documentElement.attributes)) {
+              attrs[attr.name] = attr.value;
+            }
+            return attrs;
+          });
 
           const parent = frame.parentFrame();
           if (parent) {
-            await parent.evaluate((url, bodyHtml, styles) => {
+            await parent.evaluate((url, bodyHtml, styles, bodyAttrs, htmlAttrs) => {
               styles.forEach(styleHtml => {
                 const temp = document.createElement('div');
                 temp.innerHTML = styleHtml;
                 document.head.appendChild(temp.firstChild!);
               });
+
+              // Apply child html attributes to parent documentElement (e.g., data-theme)
+              for (const [name, val] of Object.entries(htmlAttrs)) {
+                if (name !== 'style') {
+                  document.documentElement.setAttribute(name, val);
+                }
+              }
 
               const iframes = Array.from(document.querySelectorAll('iframe'));
               for (const iframe of iframes) {
@@ -654,6 +742,16 @@ async function snapshot(opts: Opts): Promise<void> {
                 if (cleanIframeSrc && (url.includes(cleanIframeSrc) || cleanIframeSrc.includes(url))) {
                   const wrapper = document.createElement('div');
                   wrapper.className = 'ac-iframe-inlined-wrapper';
+
+                  // Apply child body's classes and attributes to the wrapper
+                  for (const [name, val] of Object.entries(bodyAttrs)) {
+                    if (name === 'class') {
+                      wrapper.classList.add(...val.split(/\s+/).filter(Boolean));
+                    } else if (name !== 'style') {
+                      wrapper.setAttribute(name, val);
+                    }
+                  }
+
                   wrapper.style.position = 'absolute';
                   wrapper.style.top = '0';
                   wrapper.style.left = '0';
@@ -665,7 +763,7 @@ async function snapshot(opts: Opts): Promise<void> {
                   break;
                 }
               }
-            }, cleanUrl, frameBodyHtml, frameStyles);
+            }, cleanUrl, frameBodyHtml, frameStyles, frameBodyAttrs, frameHtmlAttrs);
           }
 
         } catch (frameErr) {
