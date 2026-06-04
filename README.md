@@ -9,26 +9,9 @@ The fastest way to set up the full Stitch plugin suite globally.
 
 #### Codex
 
-In Codex, add this repository as a plugin marketplace:
+Add the Stitch Skills marketplace, then install the plugins you need.
 
-| Field | Value |
-|---|---|
-| Source | `https://github.com/google-labs-code/stitch-skills` |
-| Git ref | `main` |
-| Sparse paths | Leave empty, or use the paths below for a smaller checkout |
-
-Optional sparse paths:
-
-```text
-.agents/plugins
-plugins/stitch-design
-plugins/stitch-build
-plugins/stitch-utilities
-```
-
-Do not use `plugins/codex`; that path does not exist in this repository.
-
-The equivalent Codex CLI command is:
+**Via CLI** (recommended):
 
 ```bash
 codex plugin marketplace add google-labs-code/stitch-skills --ref main \
@@ -38,16 +21,37 @@ codex plugin marketplace add google-labs-code/stitch-skills --ref main \
   --sparse plugins/stitch-utilities
 ```
 
-After adding the marketplace, install the plugins you need from the `Stitch Skills` marketplace:
+> [!TIP]
+> The `--sparse` flags are optional — they limit the checkout to only the
+> listed paths for a faster clone. Omit them to pull the entire repository.
 
-- `stitch-design`
-- `stitch-build`
-- `stitch-utilities`
+<details>
+<summary><strong>Via the Codex UI</strong></summary>
 
-#### Claude Code
+Navigate to **Settings → Plugin Marketplaces → Add** and fill in:
+
+| Field | Value |
+|---|---|
+| **Source** | `https://github.com/google-labs-code/stitch-skills` |
+| **Git ref** | `main` |
+| **Sparse paths** | *(optional)* `.agents/plugins`, `plugins/stitch-design`, `plugins/stitch-build`, `plugins/stitch-utilities` |
+
+</details>
+
+Once the marketplace is registered, install any combination of:
+
+- **`stitch-design`** — design-focused skills
+- **`stitch-build`** — build and component skills
+- **`stitch-utilities`** — utility and helper skills
+
+#### Claude Code & Cursor
 
 ```bash
 npx plugins add google-labs-code/stitch-skills --scope project --target claude-code
+```
+
+```bash
+npx plugins add google-labs-code/stitch-skills --scope workspace --target cursor
 ```
 
 ### 2. Install Skills Selectively
