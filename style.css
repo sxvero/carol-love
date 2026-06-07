@@ -1,13 +1,3 @@
-/* ============================================================
-   CAROL - Romantic Interactive Experience
-   Premium CSS Stylesheet
-   Fonts: Cormorant Garamond | Outfit | Dancing Script
-   Palette: Pink & White Tones
-   ============================================================ */
-
-/* ------------------------------------------------------------
-   1. CSS VARIABLES & RESET
-   ------------------------------------------------------------ */
 
 :root {
     --bg-base: #FFF0F5;
@@ -26,7 +16,6 @@
     --font-hand: 'Dancing Script', cursive;
     --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 *,
 *::before,
 *::after {
@@ -34,11 +23,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 html {
     scroll-behavior: smooth;
 }
-
 body {
     background-color: var(--bg-base);
     background-image: radial-gradient(at 0% 0%, rgba(255, 240, 245, 0.8) 0, transparent 50%), radial-gradient(at 50% 0%, rgba(249, 209, 220, 0.3) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(255, 245, 249, 0.8) 0, transparent 50%);
@@ -51,8 +38,6 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
 }
-
-/* Scroll Reveal Animations */
 .reveal-on-scroll {
     opacity: 0;
     transform: translateY(30px);
@@ -62,12 +47,6 @@ body {
     opacity: 1;
     transform: translateY(0);
 }
-
-
-/* ------------------------------------------------------------
-   2. LOADING SCREEN
-   ------------------------------------------------------------ */
-
 #loading-screen {
     position: fixed;
     top: 0;
@@ -81,32 +60,27 @@ body {
     justify-content: center;
     transition: opacity 0.8s var(--transition-smooth);
 }
-
 #loading-screen.loading-done {
     opacity: 0;
     pointer-events: none;
 }
-
 .loader-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
 }
-
 .loader-heart {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .heart-shape {
     position: relative;
     width: 40px;
     height: 36px;
     animation: heartbeat 1.2s ease-in-out infinite;
 }
-
 .heart-shape::before,
 .heart-shape::after {
     content: '';
@@ -117,19 +91,16 @@ body {
     border-radius: 22px 22px 0 0;
     background-color: var(--accent-pink);
 }
-
 .heart-shape::before {
     left: 0;
     transform: rotate(-45deg);
     transform-origin: bottom right;
 }
-
 .heart-shape::after {
     right: 0;
     transform: rotate(45deg);
     transform-origin: bottom left;
 }
-
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
     15% { transform: scale(1.25); }
@@ -137,19 +108,16 @@ body {
     45% { transform: scale(1.15); }
     60% { transform: scale(1); }
 }
-
 .loader-text {
     font-family: var(--font-hand);
     font-size: 1.3rem;
     color: var(--accent-pink);
     animation: fadeIn 1s ease forwards;
 }
-
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
-
 .loader-bar {
     width: 200px;
     height: 3px;
@@ -157,24 +125,16 @@ body {
     border-radius: 999px;
     overflow: hidden;
 }
-
 .loader-fill {
     height: 100%;
     border-radius: 999px;
     background: linear-gradient(to right, var(--accent-soft), var(--accent-pink));
     animation: loadProgress 2s ease-in-out forwards;
 }
-
 @keyframes loadProgress {
     from { width: 0%; }
     to { width: 100%; }
 }
-
-
-/* ------------------------------------------------------------
-   3. PROGRESS BAR
-   ------------------------------------------------------------ */
-
 #progress-bar {
     position: fixed;
     top: 0;
@@ -186,12 +146,6 @@ body {
     box-shadow: 0 0 8px rgba(232, 114, 154, 0.4);
     transition: width 0.15s linear;
 }
-
-
-/* ------------------------------------------------------------
-   4. PARTICLE CANVAS
-   ------------------------------------------------------------ */
-
 #particleCanvas {
     position: fixed;
     top: 0;
@@ -201,12 +155,6 @@ body {
     z-index: -2;
     pointer-events: none;
 }
-
-
-/* ------------------------------------------------------------
-   5. AMBIENT ORBS
-   ------------------------------------------------------------ */
-
 .ambient-orb {
     position: fixed;
     border-radius: 50%;
@@ -215,7 +163,6 @@ body {
     pointer-events: none;
     opacity: 0.4;
 }
-
 .orb-1 {
     width: 40vw;
     height: 40vw;
@@ -224,7 +171,6 @@ body {
     left: -10%;
     animation: floatOrb 20s ease-in-out infinite alternate;
 }
-
 .orb-2 {
     width: 35vw;
     height: 35vw;
@@ -233,7 +179,6 @@ body {
     right: -10%;
     animation: floatOrb 25s ease-in-out infinite alternate-reverse;
 }
-
 .orb-3 {
     width: 30vw;
     height: 30vw;
@@ -242,7 +187,6 @@ body {
     left: 35%;
     animation: floatOrb 18s ease-in-out infinite alternate;
 }
-
 @keyframes floatOrb {
     0% {
         transform: translate(0, 0) scale(1);
@@ -257,12 +201,6 @@ body {
         transform: translate(10px, -30px) scale(1.02);
     }
 }
-
-
-/* ------------------------------------------------------------
-   6. INTRO SCREEN
-   ------------------------------------------------------------ */
-
 .intro-screen,
 #intro-screen {
     position: fixed;
@@ -277,12 +215,10 @@ body {
     z-index: 100;
     transition: opacity 1.5s var(--transition-smooth);
 }
-
 .intro-screen.hidden {
     opacity: 0;
     pointer-events: none;
 }
-
 .intro-content {
     display: flex;
     flex-direction: column;
@@ -290,7 +226,6 @@ body {
     text-align: center;
     gap: 1.5rem;
 }
-
 .intro-pre {
     font-family: var(--font-hand);
     font-size: 1.4rem;
@@ -299,7 +234,6 @@ body {
     animation: fadeUp 1s ease forwards;
     opacity: 0;
 }
-
 .intro-title {
     font-family: var(--font-display);
     font-size: clamp(4rem, 12vw, 8rem);
@@ -313,7 +247,6 @@ body {
     opacity: 0;
     line-height: 1.1;
 }
-
 .intro-sub {
     font-family: var(--font-body);
     font-size: 1.1rem;
@@ -322,7 +255,6 @@ body {
     animation: fadeUp 1s ease 0.6s forwards;
     opacity: 0;
 }
-
 .premium-btn {
     background: linear-gradient(135deg, var(--accent-pink), var(--accent-blush));
     border: none;
@@ -341,16 +273,13 @@ body {
     animation: fadeUp 1s ease 0.9s forwards;
     opacity: 0;
 }
-
 .premium-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 40px rgba(232, 114, 154, 0.5);
 }
-
 .premium-btn:active {
     transform: translateY(-1px);
 }
-
 .btn-shimmer {
     position: absolute;
     top: 0;
@@ -365,14 +294,12 @@ body {
     );
     animation: shimmer 3s infinite;
 }
-
 .scroll-hint {
     font-size: 0.9rem;
     color: var(--text-secondary);
     opacity: 1;
     transition: opacity 0.5s var(--transition-smooth);
 }
-
 @keyframes fadeUp {
     from {
         opacity: 0;
@@ -383,17 +310,10 @@ body {
         transform: translateY(0);
     }
 }
-
 @keyframes shimmer {
     0% { left: -100%; }
     100% { left: 200%; }
 }
-
-
-/* ------------------------------------------------------------
-   7. CURTAINS
-   ------------------------------------------------------------ */
-
 .curtain-container {
     position: fixed;
     top: 0;
@@ -404,52 +324,38 @@ body {
     z-index: 90;
     pointer-events: none;
 }
-
 .curtain {
     width: 50%;
     height: 100%;
     transition: transform 1.5s var(--transition-smooth);
 }
-
 .curtain-left {
     background: linear-gradient(90deg, #8B0030, #C0005A, #8B0030);
     transform-origin: left center;
 }
-
 .curtain-right {
     background: linear-gradient(90deg, #8B0030, #C0005A, #8B0030);
     transform-origin: right center;
 }
-
 .curtain-fold {
     width: 100%;
     height: 100%;
     box-shadow: inset -30px 0 60px rgba(0, 0, 0, 0.25),
                 inset 10px 0 30px rgba(0, 0, 0, 0.1);
 }
-
 .curtain-right .curtain-fold {
     box-shadow: inset 30px 0 60px rgba(0, 0, 0, 0.25),
                 inset -10px 0 30px rgba(0, 0, 0, 0.1);
 }
-
 .curtain-container.open .curtain-left {
     transform: translateX(-100%);
 }
-
 .curtain-container.open .curtain-right {
     transform: translateX(100%);
 }
-
-
-/* ------------------------------------------------------------
-   8. SHARED SECTION STYLES
-   ------------------------------------------------------------ */
-
 .scroll-section {
     position: relative;
 }
-
 .sticky-view {
     position: sticky;
     top: 0;
@@ -460,7 +366,6 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 .section-title {
     position: absolute;
     top: 8%;
@@ -478,16 +383,9 @@ body {
     line-height: 1.2;
     letter-spacing: 0.02em;
 }
-
 .accent {
     color: var(--accent-pink);
 }
-
-
-/* ------------------------------------------------------------
-   9. RED THREAD (#sec-thread)
-   ------------------------------------------------------------ */
-
 .thread-view {
     display: flex;
     flex-direction: column;
@@ -495,7 +393,6 @@ body {
     justify-content: center;
     background: transparent;
 }
-
 #threadCanvas {
     position: absolute;
     top: 0;
@@ -504,7 +401,6 @@ body {
     height: 100%;
     z-index: 1;
 }
-
 .thread-title {
     font-family: var(--font-display);
     font-size: clamp(2.5rem, 7vw, 5rem);
@@ -516,11 +412,9 @@ body {
     text-align: center;
     padding: 0 1rem;
 }
-
 .thread-title.visible {
     opacity: 1;
 }
-
 .thread-knots {
     position: absolute;
     top: 0;
@@ -529,7 +423,6 @@ body {
     height: 100%;
     z-index: 3;
 }
-
 .knot {
     position: absolute;
     width: 50px;
@@ -547,7 +440,6 @@ body {
                 box-shadow 0.4s ease;
     animation: knotPulse 2s ease-in-out infinite;
 }
-
 .knot-inner {
     width: 12px;
     height: 12px;
@@ -555,22 +447,18 @@ body {
     background: #fff;
     opacity: 0.8;
 }
-
 .knot.visible {
     transform: scale(1);
 }
-
 .knot.opened {
     background: linear-gradient(135deg, var(--accent-pink), var(--accent-blush));
     animation: none;
     box-shadow: 0 4px 25px rgba(232, 114, 154, 0.5);
 }
-
 @keyframes knotPulse {
     0%, 100% { box-shadow: 0 4px 20px rgba(212, 163, 115, 0.4); }
     50% { box-shadow: 0 4px 30px rgba(212, 163, 115, 0.7); }
 }
-
 .knot-reveal {
     position: absolute;
     bottom: 15%;
@@ -593,26 +481,17 @@ body {
     width: 80%;
     z-index: 5;
 }
-
 .knot-reveal.show {
     opacity: 1;
 }
-
 #knot-1 { top: 25%; left: 15%; }
 #knot-2 { top: 40%; left: 70%; }
 #knot-3 { top: 60%; left: 30%; }
 #knot-4 { top: 78%; left: 65%; }
-
-
-/* ------------------------------------------------------------
-   10. BUBBLES (#sec-bubbles)
-   ------------------------------------------------------------ */
-
 .bubble-view {
     background: transparent;
     position: relative;
 }
-
 .bubble-container {
     position: absolute;
     top: 0;
@@ -627,7 +506,6 @@ body {
     padding: 15% 5%;
     gap: 10px;
 }
-
 .bubble {
     position: absolute;
     border-radius: 50%;
@@ -643,13 +521,9 @@ body {
     animation: floatBubble 5s ease-in-out infinite;
     transition: transform 0.2s ease;
 }
-
 .bubble:hover {
     transform: scale(1.1);
 }
-
-
-
 .bubble.popped {
     font-family: var(--font-hand);
     font-size: clamp(1.4rem, 4vw, 2rem);
@@ -659,25 +533,17 @@ body {
     box-shadow: none;
     animation: popBubble 0.5s ease forwards;
 }
-
 @keyframes floatBubble {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     25% { transform: translateY(-12px) rotate(2deg); }
     50% { transform: translateY(-5px) rotate(-1deg); }
     75% { transform: translateY(-18px) rotate(1deg); }
 }
-
 @keyframes popBubble {
     0% { transform: scale(1); opacity: 1; }
     30% { transform: scale(1.4); opacity: 0.7; }
     100% { transform: scale(0); opacity: 0; }
 }
-
-
-/* ------------------------------------------------------------
-   11. SCRATCH CARDS (#sec-scratch)
-   ------------------------------------------------------------ */
-
 .scratch-view {
     display: flex;
     flex-direction: column;
@@ -686,14 +552,12 @@ body {
     gap: 2rem;
     padding: 2rem;
 }
-
 .scratch-cards {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
 }
-
 .scratch-card {
     position: relative;
     width: 300px;
@@ -708,13 +572,11 @@ body {
     -webkit-backdrop-filter: blur(10px);
     transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth);
 }
-
 .scratch-card:hover {
     transform: translateY(-6px) scale(1.02);
     box-shadow: 0 20px 50px rgba(232, 114, 154, 0.25),
                 0 8px 16px rgba(0, 0, 0, 0.06);
 }
-
 .scratch-hidden {
     position: absolute;
     top: 0;
@@ -733,7 +595,6 @@ body {
     line-height: 1.4;
     box-shadow: inset 0 0 40px rgba(255,255,255,0.8);
 }
-
 .scratch-canvas {
     position: absolute;
     top: 0;
@@ -743,12 +604,6 @@ body {
     cursor: crosshair;
     border-radius: 20px;
 }
-
-
-/* ------------------------------------------------------------
-   12. CATCH HEARTS (#sec-hearts)
-   ------------------------------------------------------------ */
-
 .hearts-view {
     display: flex;
     flex-direction: column;
@@ -756,7 +611,6 @@ body {
     justify-content: center;
     background: transparent;
 }
-
 .hearts-arena {
     position: absolute;
     top: 0;
@@ -765,7 +619,6 @@ body {
     height: 100%;
     overflow: hidden;
 }
-
 .flying-heart {
     position: absolute;
     width: 30px;
@@ -776,20 +629,16 @@ body {
     user-select: none;
     transition: transform 0.15s ease;
 }
-
 .flying-heart svg {
     width: 100%;
     height: 100%;
 }
-
 .flying-heart:hover {
     transform: scale(1.2);
 }
-
 .flying-heart.caught {
     animation: heartCaught 0.5s ease forwards;
 }
-
 @keyframes flyHeart {
     from {
         transform: translateX(-60px);
@@ -800,13 +649,11 @@ body {
         opacity: 1;
     }
 }
-
 @keyframes heartCaught {
     0% { transform: scale(1); opacity: 1; }
     40% { transform: scale(1.8); opacity: 0.8; }
     100% { transform: scale(0); opacity: 0; }
 }
-
 .hearts-score {
     position: absolute;
     top: 15%;
@@ -819,7 +666,6 @@ body {
     z-index: 10;
     letter-spacing: 0.05em;
 }
-
 .hearts-reward {
     position: absolute;
     top: 50%;
@@ -842,17 +688,10 @@ body {
     z-index: 20;
     box-shadow: 0 12px 40px rgba(232, 114, 154, 0.2);
 }
-
 .hearts-reward.show {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
 }
-
-
-/* ------------------------------------------------------------
-   13. TYPEWRITER (#sec-typewriter)
-   ------------------------------------------------------------ */
-
 .typewriter-view {
     display: flex;
     flex-direction: column;
@@ -860,7 +699,6 @@ body {
     justify-content: center;
     gap: 2rem;
 }
-
 .typewriter-paper {
     background: linear-gradient(180deg, #FFFDF9, #FFF8F0);
     border-radius: 4px 16px 16px 4px;
@@ -874,7 +712,6 @@ body {
     border-left: 4px solid var(--accent-pink);
     position: relative;
 }
-
 .typewriter-paper::before {
     content: '';
     position: absolute;
@@ -891,7 +728,6 @@ body {
     pointer-events: none;
     border-radius: inherit;
 }
-
 .typewriter-text {
     font-family: var(--font-display);
     font-size: 1.4rem;
@@ -899,19 +735,16 @@ body {
     color: var(--text-primary);
     white-space: pre-wrap;
 }
-
 .typewriter-cursor {
     display: inline;
     font-weight: 100;
     color: var(--accent-pink);
     animation: blink 1s step-end infinite;
 }
-
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
-
 .tap-key {
     background: linear-gradient(135deg, var(--accent-pink), var(--accent-blush));
     border: none;
@@ -928,21 +761,13 @@ body {
     position: relative;
     overflow: hidden;
 }
-
 .tap-key:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(232, 114, 154, 0.45);
 }
-
 .tap-key:active {
     transform: scale(0.95);
 }
-
-
-/* ------------------------------------------------------------
-   14. STRING TELEPHONE (#sec-telephone)
-   ------------------------------------------------------------ */
-
 .telephone-view {
     display: flex;
     flex-direction: column;
@@ -950,7 +775,6 @@ body {
     justify-content: center;
     gap: 2rem;
 }
-
 .telephone-container {
     display: flex;
     flex-direction: row;
@@ -960,7 +784,6 @@ body {
     max-width: 500px;
     position: relative;
 }
-
 .cup {
     display: flex;
     flex-direction: column;
@@ -968,7 +791,6 @@ body {
     width: 70px;
     flex-shrink: 0;
 }
-
 .cup-body {
     width: 50px;
     height: 65px;
@@ -977,67 +799,55 @@ body {
     border-radius: 0 0 8px 8px;
     clip-path: polygon(5% 0%, 95% 0%, 80% 100%, 20% 100%);
 }
-
 .cup-label {
     font-family: var(--font-hand);
     font-size: 0.85rem;
     color: var(--accent-pink);
     margin-top: 8px;
 }
-
 .cup-left {
     cursor: pointer;
     transition: transform 0.2s var(--transition-smooth);
 }
-
 .cup-left:hover {
     transform: scale(1.05);
 }
-
 .cup-left.tapped {
     animation: cupTap 0.3s ease;
 }
-
 @keyframes cupTap {
     0% { transform: scale(1); }
     50% { transform: scale(0.9) rotate(-5deg); }
     100% { transform: scale(1); }
 }
-
 .phone-string {
     flex: 1;
     height: 60px;
     overflow: visible;
 }
-
 .phone-string svg {
     width: 100%;
     height: 100%;
     overflow: visible;
 }
-
 .string-path {
     stroke: var(--accent-soft);
     stroke-width: 2;
     fill: none;
 }
-
 .string-wave {
     fill: var(--accent-pink);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
-
 .string-wave.active {
     opacity: 1;
     animation: waveTravel 1.5s ease-in-out forwards;
 }
-
 @keyframes waveTravel {
     from { cx: 0; }
     to { cx: 400; }
 }
-
 .phone-message {
     background: var(--glass-bg);
     backdrop-filter: blur(24px) saturate(150%);
@@ -1059,22 +869,14 @@ body {
                 transform 0.6s var(--transition-smooth);
     margin: 0 auto;
 }
-
 .phone-message.show {
     opacity: 1;
     transform: translateY(0);
 }
-
-
-/* ------------------------------------------------------------
-   15. STATIONS (#sec-stations)
-   ------------------------------------------------------------ */
-
 .stations-view {
     background: transparent;
     position: relative;
 }
-
 .station-path {
     position: absolute;
     left: 50%;
@@ -1083,7 +885,6 @@ body {
     height: 100%;
     transform: translateX(-50%);
 }
-
 .station-line {
     width: 100%;
     height: 0%;
@@ -1091,18 +892,15 @@ body {
     border-radius: 999px;
     transition: height 0.4s var(--transition-smooth);
 }
-
 .station-gift {
     position: absolute;
     z-index: 5;
     cursor: pointer;
     transition: transform 0.3s var(--transition-smooth);
 }
-
 .station-gift:hover {
     transform: scale(1.1);
 }
-
 .gift-box-css {
     width: 65px;
     height: 60px;
@@ -1116,7 +914,6 @@ body {
     animation: giftBounce 2s ease-in-out infinite;
     border: 1px solid rgba(255,255,255,0.3);
 }
-
 .gift-box-css::after {
     content: '';
     position: absolute;
@@ -1129,12 +926,10 @@ body {
     border-bottom: none;
     border-radius: 12px 12px 0 0;
 }
-
 @keyframes giftBounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
 }
-
 .gift-ribbon {
     position: absolute;
     left: 50%;
@@ -1145,7 +940,6 @@ body {
     border-radius: 2px;
     transform: translateX(-50%);
 }
-
 .gift-ribbon::before {
     content: '';
     position: absolute;
@@ -1157,17 +951,14 @@ body {
     background: var(--accent-pink);
     border-radius: 2px;
 }
-
 .station-gift.opened .gift-box-css {
     animation: unwrapGift 0.8s ease forwards;
 }
-
 @keyframes unwrapGift {
     0% { transform: scale(1) rotate(0deg); }
     40% { transform: scale(1.3) rotate(10deg); }
     100% { transform: scale(0) rotate(45deg); opacity: 0; }
 }
-
 .gift-msg {
     position: absolute;
     top: -80px;
@@ -1190,16 +981,9 @@ body {
     transition: opacity 0.5s var(--transition-smooth);
     box-shadow: 0 6px 20px rgba(232, 114, 154, 0.12);
 }
-
 .station-gift.opened .gift-msg {
     opacity: 1;
 }
-
-
-/* ------------------------------------------------------------
-   16. TREE (#sec-tree)
-   ------------------------------------------------------------ */
-
 .tree-view {
     display: flex;
     flex-direction: column;
@@ -1207,18 +991,15 @@ body {
     justify-content: center;
     background: transparent;
 }
-
 .tree-container {
     position: relative;
     width: 300px;
     height: 400px;
 }
-
 #tree-svg {
     width: 100%;
     height: 100%;
 }
-
 .tree-trunk {
     fill: none;
     stroke: #8B5A2B;
@@ -1226,7 +1007,6 @@ body {
     stroke-linecap: round;
     filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
 }
-
 .tree-branch {
     fill: none;
     stroke: #A0522D;
@@ -1237,11 +1017,9 @@ body {
     transition: stroke-dashoffset 1s var(--transition-smooth);
     filter: drop-shadow(0 3px 3px rgba(0,0,0,0.2));
 }
-
 .tree-branch.grow {
     stroke-dashoffset: 0;
 }
-
 .tree-leaves {
     position: absolute;
     top: 0;
@@ -1250,7 +1028,6 @@ body {
     height: 100%;
     pointer-events: none;
 }
-
 .tree-leaf {
     position: absolute;
     width: 14px;
@@ -1259,11 +1036,9 @@ body {
     transform: rotate(45deg) scale(0);
     transition: transform 0.6s var(--transition-smooth);
 }
-
 .tree-leaf.bloom {
     transform: rotate(45deg) scale(1);
 }
-
 .tree-flower-css {
     position: absolute;
     width: 16px;
@@ -1274,8 +1049,6 @@ body {
     transition: opacity 0.5s var(--transition-smooth),
                 transform 0.5s var(--transition-smooth);
 }
-
-
 .tree-flower-css::before,
 .tree-flower-css::after {
     content: '';
@@ -1285,22 +1058,18 @@ body {
     border-radius: 50%;
     background: inherit;
 }
-
 .tree-flower-css::before {
     top: -5px;
     left: 3px;
 }
-
 .tree-flower-css::after {
     top: 3px;
     left: -5px;
 }
-
 .tree-flower-css.bloom {
     opacity: 1;
     transform: scale(1);
 }
-
 .tree-hold-ring {
     position: absolute;
     bottom: -130px;
@@ -1325,25 +1094,21 @@ body {
     -webkit-touch-callout: none;
     touch-action: manipulation;
 }
-
 .hold-icon {
     width: 24px;
     height: 24px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--accent-soft), var(--accent-pink));
 }
-
 .tree-hold-ring.holding {
     border-color: var(--accent-pink);
     box-shadow: 0 0 25px rgba(232, 114, 154, 0.4);
     animation: holdPulse 1.5s ease-in-out infinite;
 }
-
 @keyframes holdPulse {
     0%, 100% { box-shadow: 0 0 25px rgba(232, 114, 154, 0.4); }
     50% { box-shadow: 0 0 40px rgba(232, 114, 154, 0.7); }
 }
-
 .tree-final-msg {
     text-align: center;
     margin-top: 3rem;
@@ -1352,12 +1117,10 @@ body {
     transition: opacity 0.8s var(--transition-smooth),
                 transform 0.8s var(--transition-smooth);
 }
-
 .tree-final-msg.show {
     opacity: 1;
     transform: translateY(0);
 }
-
 .tree-final-msg h2 {
     font-family: var(--font-display);
     font-size: clamp(2rem, 5vw, 3.5rem);
@@ -1365,31 +1128,22 @@ body {
     line-height: 1.3;
     color: var(--text-primary);
 }
-
 .final-signature {
     font-family: var(--font-hand);
     font-size: 1.8rem;
     color: var(--accent-pink);
     margin-top: 0.5rem;
 }
-
-
-/* ------------------------------------------------------------
-   17. LLUVIA DE ESTRELLITAS (#sec-stars)
-   ------------------------------------------------------------ */
-
 .stars-view {
     background: linear-gradient(to bottom, #2D1B33, #1A0F20, #0D0710);
     position: relative;
     overflow: hidden;
 }
-
 .stars-title {
     color: rgba(255, 255, 255, 0.85) !important;
     -webkit-text-fill-color: rgba(255, 255, 255, 0.85) !important;
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
 }
-
 .stars-sky {
     position: absolute;
     top: 0;
@@ -1397,7 +1151,6 @@ body {
     width: 100%;
     height: 100%;
 }
-
 .css-star {
     position: absolute;
     width: 2px;
@@ -1406,12 +1159,10 @@ body {
     border-radius: 50%;
     animation: twinkle 3s ease-in-out infinite alternate;
 }
-
 @keyframes twinkle {
     0% { opacity: 0.3; transform: scale(0.8); }
     100% { opacity: 1; transform: scale(1.2); }
 }
-
 .shooting-star {
     position: absolute;
     top: 30%;
@@ -1420,12 +1171,10 @@ body {
     z-index: 10;
     opacity: 0;
 }
-
 .shooting-star.active {
     opacity: 1;
     animation: shootAcross 4s linear infinite;
 }
-
 .star-body {
     display: block;
     width: 12px;
@@ -1435,7 +1184,6 @@ body {
     box-shadow: 0 0 8px #fff,
                 0 0 20px rgba(255, 255, 255, 0.6);
 }
-
 .star-trail {
     position: absolute;
     left: -40px;
@@ -1445,7 +1193,6 @@ body {
     background: linear-gradient(to left, #fff, transparent);
     transform: translateY(-50%);
 }
-
 @keyframes shootAcross {
     from {
         left: -100px;
@@ -1454,17 +1201,14 @@ body {
         left: calc(100% + 100px);
     }
 }
-
 .shooting-star.caught {
     animation: starCaught 0.6s ease forwards;
 }
-
 @keyframes starCaught {
     0% { transform: scale(1); opacity: 1; }
     30% { transform: scale(2); opacity: 1; filter: brightness(2); }
     100% { transform: scale(0); opacity: 0; }
 }
-
 .stars-message {
     position: absolute;
     top: 50%;
@@ -1487,16 +1231,9 @@ body {
     max-width: 400px;
     width: 85%;
 }
-
 .stars-message.show {
     opacity: 1;
 }
-
-
-/* ------------------------------------------------------------
-   18. COLUMPIO (#sec-swing)
-   ------------------------------------------------------------ */
-
 .swing-view {
     display: flex;
     flex-direction: column;
@@ -1506,19 +1243,16 @@ body {
     background: transparent;
     padding-top: 4rem;
 }
-
 .swing-container {
     position: relative;
     width: 250px;
     height: 250px;
 }
-
 .swing-frame {
     position: relative;
     width: 100%;
     height: 100%;
 }
-
 .swing-post-left,
 .swing-post-right {
     position: absolute;
@@ -1526,19 +1260,16 @@ body {
     border-radius: 3px;
     top: 0;
 }
-
 .swing-post-left {
     left: 20px;
     height: 250px;
     background: linear-gradient(to bottom, var(--accent-warm), #B8895A);
 }
-
 .swing-post-right {
     right: 20px;
     height: 250px;
     background: linear-gradient(to bottom, var(--accent-warm), #B8895A);
 }
-
 .swing-bar {
     position: absolute;
     top: 0;
@@ -1548,7 +1279,6 @@ body {
     background: var(--accent-warm);
     border-radius: 3px;
 }
-
 .swing-seat-wrapper {
     position: absolute;
     top: 6px;
@@ -1559,11 +1289,9 @@ body {
     transform-origin: top center;
     transition: transform 0.6s ease-in-out;
 }
-
 .swing-seat-wrapper.swinging {
     animation: swingAnim 1s ease-in-out;
 }
-
 @keyframes swingAnim {
     0% { transform: translateX(-50%) rotate(0deg); }
     25% { transform: translateX(-50%) rotate(-20deg); }
@@ -1571,7 +1299,6 @@ body {
     75% { transform: translateX(-50%) rotate(20deg); }
     100% { transform: translateX(-50%) rotate(0deg); }
 }
-
 .swing-rope-left,
 .swing-rope-right {
     position: absolute;
@@ -1580,15 +1307,12 @@ body {
     background: var(--accent-warm);
     top: 0;
 }
-
 .swing-rope-left {
     left: 5px;
 }
-
 .swing-rope-right {
     right: 5px;
 }
-
 .swing-seat {
     position: absolute;
     bottom: 0;
@@ -1600,7 +1324,6 @@ body {
     border-radius: 4px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
-
 .swing-words {
     display: flex;
     flex-wrap: wrap;
@@ -1609,7 +1332,6 @@ body {
     max-width: 300px;
     min-height: 40px;
 }
-
 .swing-word {
     font-family: var(--font-display);
     font-size: 1.6rem;
@@ -1620,12 +1342,10 @@ body {
     transition: opacity 0.5s var(--transition-smooth),
                 transform 0.5s var(--transition-smooth);
 }
-
 .swing-word.show {
     opacity: 1;
     transform: translateY(0);
 }
-
 .swing-btn {
     background: linear-gradient(135deg, var(--accent-pink), var(--accent-blush));
     border: none;
@@ -1640,21 +1360,13 @@ body {
     transition: transform 0.2s var(--transition-smooth),
                 box-shadow 0.2s var(--transition-smooth);
 }
-
 .swing-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(232, 114, 154, 0.45);
 }
-
 .swing-btn:active {
     transform: scale(0.95);
 }
-
-
-/* ------------------------------------------------------------
-   19. CARTA EN BOTELLA (#sec-bottle)
-   ------------------------------------------------------------ */
-
 .bottle-view {
     display: flex;
     flex-direction: column;
@@ -1664,11 +1376,9 @@ body {
     overflow: hidden;
     position: relative;
 }
-
 .bottle-title {
     z-index: 5;
 }
-
 .ocean {
     position: absolute;
     bottom: 0;
@@ -1678,32 +1388,27 @@ body {
     pointer-events: none;
     overflow: hidden;
 }
-
 .wave {
     position: absolute;
     width: 200%;
     height: 100%;
     border-radius: 40% 45%;
 }
-
 .wave-1 {
     background: rgba(232, 114, 154, 0.15);
     animation: waveMove 8s linear infinite;
     bottom: 0;
 }
-
 .wave-2 {
     background: rgba(249, 209, 220, 0.2);
     animation: waveMove 10s linear infinite reverse;
     bottom: -10px;
 }
-
 .wave-3 {
     background: rgba(251, 173, 196, 0.15);
     animation: waveMove 12s linear infinite;
     bottom: -20px;
 }
-
 @keyframes waveMove {
     from {
         transform: translateX(0) rotate(0deg);
@@ -1712,7 +1417,6 @@ body {
         transform: translateX(-50%) rotate(2deg);
     }
 }
-
 .bottle-float {
     position: absolute;
     bottom: 38%;
@@ -1725,12 +1429,10 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
 @keyframes bottleFloat {
     0%, 100% { transform: translateX(-50%) translateY(0) rotate(-2deg); }
     50% { transform: translateX(-50%) translateY(-15px) rotate(2deg); }
 }
-
 .bottle-body-css {
     width: 35px;
     height: 70px;
@@ -1741,7 +1443,6 @@ body {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
-
 .bottle-neck-css {
     position: absolute;
     top: -20px;
@@ -1753,7 +1454,6 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.6);
     border-radius: 4px 4px 0 0;
 }
-
 .bottle-cork-css {
     position: absolute;
     top: -28px;
@@ -1764,7 +1464,6 @@ body {
     background: var(--accent-warm);
     border-radius: 3px 3px 1px 1px;
 }
-
 .bottle-label {
     font-family: var(--font-hand);
     font-size: 0.85rem;
@@ -1772,18 +1471,15 @@ body {
     margin-top: 8px;
     text-align: center;
 }
-
 .bottle-float.opened {
     animation: corkPop 0.8s ease forwards;
 }
-
 @keyframes corkPop {
     0% { transform: translateX(-50%) rotate(0deg); }
     30% { transform: translateX(-50%) rotate(-15deg) translateY(-10px); }
     60% { transform: translateX(-50%) rotate(5deg) translateY(-5px); }
     100% { transform: translateX(-50%) rotate(10deg) translateY(0px); }
 }
-
 .parchment {
     background: var(--glass-bg);
     backdrop-filter: blur(24px) saturate(150%);
@@ -1801,12 +1497,10 @@ body {
                 transform 0.8s var(--transition-smooth);
     z-index: 10;
 }
-
 .parchment.show {
     opacity: 1;
     transform: scale(1);
 }
-
 .parchment-text {
     font-family: var(--font-display);
     font-size: 1.3rem;
@@ -1814,12 +1508,6 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
 }
-
-
-/* ------------------------------------------------------------
-   20. JARDIN SECRETO (#sec-garden)
-   ------------------------------------------------------------ */
-
 .garden-view {
     display: flex;
     flex-direction: column;
@@ -1828,7 +1516,6 @@ body {
     gap: 2rem;
     position: relative;
 }
-
 .garden-ground {
     position: absolute;
     bottom: 5%;
@@ -1836,7 +1523,6 @@ body {
     width: 100%;
     height: 40%;
 }
-
 .garden-stem {
     width: 4px;
     height: 0;
@@ -1846,11 +1532,9 @@ body {
     position: absolute;
     transform-origin: bottom center;
 }
-
 .garden-stem.grow {
     height: var(--target-height, 80px);
 }
-
 .garden-flower-css {
     position: absolute;
     top: -15px;
@@ -1861,11 +1545,9 @@ body {
     border-radius: 50%;
     transition: transform 0.5s var(--transition-smooth) 0.5s;
 }
-
 .garden-stem.grow .garden-flower-css {
     transform: translateX(-50%) scale(1);
 }
-
 .garden-flower-css::before,
 .garden-flower-css::after {
     content: '';
@@ -1875,33 +1557,27 @@ body {
     border-radius: 50%;
     background: inherit;
 }
-
 .garden-flower-css::before {
     top: -6px;
     left: 4px;
 }
-
 .garden-flower-css::after {
     top: 4px;
     left: -6px;
 }
-
 .flower-pink {
     background: var(--accent-pink);
     box-shadow: 0 0 12px rgba(232, 114, 154, 0.4);
 }
-
 .flower-white {
     background: #fff;
     border: 1px solid var(--accent-soft);
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
-
 .flower-rose {
     background: var(--accent-blush);
     box-shadow: 0 0 12px rgba(251, 173, 196, 0.4);
 }
-
 .garden-butterfly {
     position: absolute;
     width: 24px;
@@ -1909,12 +1585,10 @@ body {
     opacity: 0;
     transition: opacity 1s var(--transition-smooth);
 }
-
 .garden-butterfly.show {
     opacity: 1;
     animation: butterflyFly 4s ease-in-out infinite;
 }
-
 .garden-butterfly::before,
 .garden-butterfly::after {
     content: '';
@@ -1922,7 +1596,6 @@ body {
     border-radius: 50% 50% 50% 0;
     background: linear-gradient(135deg, var(--accent-pink), var(--accent-soft));
 }
-
 .garden-butterfly::before {
     width: 12px;
     height: 10px;
@@ -1930,7 +1603,6 @@ body {
     left: 0;
     transform: rotate(-30deg);
 }
-
 .garden-butterfly::after {
     width: 12px;
     height: 10px;
@@ -1938,7 +1610,6 @@ body {
     right: 0;
     transform: rotate(30deg) scaleX(-1);
 }
-
 @keyframes butterflyFly {
     0% { transform: translate(0, 0) rotate(0deg); }
     25% { transform: translate(15px, -20px) rotate(5deg); }
@@ -1946,17 +1617,14 @@ body {
     75% { transform: translate(-15px, -25px) rotate(3deg); }
     100% { transform: translate(0, 0) rotate(0deg); }
 }
-
 #butterfly-1 {
     bottom: 60%;
     left: 30%;
 }
-
 #butterfly-2 {
     bottom: 45%;
     right: 25%;
 }
-
 .garden-final-msg {
     position: absolute;
     top: 50%;
@@ -1970,12 +1638,10 @@ body {
     width: 85%;
     max-width: 400px;
 }
-
 .garden-final-msg.show {
     opacity: 1;
     transform: translate(-50%, -50%) translateY(0);
 }
-
 .garden-final-msg h2 {
     font-family: var(--font-display);
     font-size: clamp(2rem, 5vw, 3.5rem);
@@ -1983,12 +1649,6 @@ body {
     line-height: 1.3;
     color: var(--text-primary);
 }
-
-
-/* ------------------------------------------------------------
-   21. POLAROID (#sec-polaroid)
-   ------------------------------------------------------------ */
-
 .polaroid-view {
     display: flex;
     flex-direction: column;
@@ -1997,7 +1657,6 @@ body {
     gap: 2rem;
     padding-top: 5vh;
 }
-
 .polaroid-view .section-title {
     position: relative;
     top: 0;
@@ -2005,12 +1664,10 @@ body {
     transform: none;
     margin-bottom: 1rem;
 }
-
 .polaroid-camera,
 #polaroid-camera {
     position: relative;
 }
-
 .camera-body-css {
     width: 220px;
     height: 155px;
@@ -2024,7 +1681,6 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 .camera-body-css::before {
     content: 'CAROL';
     position: absolute;
@@ -2035,7 +1691,6 @@ body {
     letter-spacing: 0.25em;
     color: rgba(255,255,255,0.25);
 }
-
 .camera-lens {
     width: 60px;
     height: 60px;
@@ -2051,7 +1706,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3),
                 inset 0 0 8px rgba(0, 0, 0, 0.4);
 }
-
 .camera-flash {
     position: absolute;
     top: 15px;
@@ -2061,7 +1715,6 @@ body {
     border-radius: 50%;
     background: var(--accent-soft);
 }
-
 .camera-btn {
     position: absolute;
     bottom: -20px;
@@ -2072,7 +1725,6 @@ body {
     cursor: pointer;
     padding: 0;
 }
-
 .camera-btn-inner {
     display: block;
     width: 40px;
@@ -2084,26 +1736,21 @@ body {
     transition: transform 0.2s ease,
                 box-shadow 0.2s ease;
 }
-
 .camera-btn:hover .camera-btn-inner {
     transform: scale(1.05);
     box-shadow: 0 4px 20px rgba(232, 114, 154, 0.6);
 }
-
 .camera-btn:active .camera-btn-inner {
     transform: scale(0.95);
 }
-
 .camera-body-css.flash {
     animation: cameraFlash 0.4s ease;
 }
-
 @keyframes cameraFlash {
     0% { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); }
     30% { box-shadow: 0 0 80px rgba(255, 255, 255, 0.9); }
     100% { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); }
 }
-
 .polaroid-frame {
     width: 280px;
     background: #fff;
@@ -2116,12 +1763,10 @@ body {
     transition: opacity 0.8s var(--transition-smooth),
                 transform 0.8s var(--transition-smooth);
 }
-
 .polaroid-frame.show {
     opacity: 1;
     transform: translateY(0);
 }
-
 .polaroid-photo {
     width: 100%;
     padding-bottom: 100%;
@@ -2129,11 +1774,9 @@ body {
     overflow: hidden;
     position: relative;
 }
-
 .polaroid-photo.developing {
     animation: develop 2s ease forwards;
 }
-
 @keyframes develop {
     0% {
         background: #fff;
@@ -2151,7 +1794,6 @@ body {
         );
     }
 }
-
 .polaroid-image {
     position: absolute;
     top: 0;
@@ -2162,11 +1804,9 @@ body {
     opacity: 0;
     transition: opacity 2s ease 0.5s;
 }
-
 .polaroid-photo.developing .polaroid-image {
     opacity: 1;
 }
-
 .polaroid-msg {
     font-family: var(--font-hand);
     font-size: 1.1rem;
@@ -2174,12 +1814,6 @@ body {
     text-align: center;
     margin-top: 10px;
 }
-
-
-/* ------------------------------------------------------------
-   22. MUSIC OVERLAY
-   ------------------------------------------------------------ */
-
 .music-overlay {
     position: fixed;
     top: 0;
@@ -2197,12 +1831,10 @@ body {
     pointer-events: none;
     transition: opacity 0.5s var(--transition-smooth);
 }
-
 .music-overlay.show {
     opacity: 1;
     pointer-events: auto;
 }
-
 .music-overlay-content {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
@@ -2216,12 +1848,10 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     position: relative;
 }
-
 .music-overlay-icon {
     color: var(--accent-pink);
     margin-bottom: 1rem;
 }
-
 .music-overlay-title {
     font-family: var(--font-display);
     font-size: 2rem;
@@ -2229,7 +1859,6 @@ body {
     color: var(--text-primary);
     margin-bottom: 1rem;
 }
-
 .music-overlay-msg {
     font-family: var(--font-display);
     font-size: 1.2rem;
@@ -2237,7 +1866,6 @@ body {
     color: var(--text-secondary);
     line-height: 1.6;
 }
-
 .music-overlay-close {
     position: absolute;
     top: 15px;
@@ -2256,17 +1884,10 @@ body {
                 color 0.2s ease;
     font-size: 1.2rem;
 }
-
 .music-overlay-close:hover {
     background: rgba(0, 0, 0, 0.05);
     color: var(--text-primary);
 }
-
-
-/* ------------------------------------------------------------
-   23. VINYL CONTROLLER
-   ------------------------------------------------------------ */
-
 .vinyl-controller {
     position: fixed;
     bottom: 20px;
@@ -2280,12 +1901,10 @@ body {
     transition: opacity 0.5s var(--transition-smooth);
     pointer-events: none;
 }
-
 .vinyl-controller.visible {
     opacity: 1;
     pointer-events: auto;
 }
-
 .vinyl-player-box {
     position: relative;
     width: 75px;
@@ -2300,7 +1919,6 @@ body {
     justify-content: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
-
 .vinyl-record {
     width: 60px;
     height: 60px;
@@ -2312,7 +1930,6 @@ body {
     justify-content: center;
     position: relative;
 }
-
 .vinyl-grooves {
     position: absolute;
     top: 50%;
@@ -2329,16 +1946,13 @@ body {
         rgba(255, 255, 255, 0.05) 4px
     );
 }
-
 .vinyl-record.playing {
     animation: spinVinyl 3s linear infinite;
 }
-
 @keyframes spinVinyl {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
-
 .vinyl-label {
     width: 20px;
     height: 20px;
@@ -2348,7 +1962,6 @@ body {
     z-index: 2;
     transition: background 0.3s ease;
 }
-
 .vinyl-hole {
     position: absolute;
     top: 50%;
@@ -2360,7 +1973,6 @@ body {
     background: #111;
     z-index: 3;
 }
-
 .vinyl-arm {
     position: absolute;
     top: 5px;
@@ -2374,7 +1986,6 @@ body {
     z-index: 4;
     border-radius: 2px;
 }
-
 .vinyl-arm::before {
     content: '';
     position: absolute;
@@ -2386,7 +1997,6 @@ body {
     border-radius: 50%;
     background: #aaa;
 }
-
 .vinyl-arm::after {
     content: '';
     position: absolute;
@@ -2398,16 +2008,13 @@ body {
     background: #888;
     border-radius: 1px;
 }
-
 .vinyl-player-box.is-playing .vinyl-arm {
     transform: rotate(18deg);
 }
-
 .vinyl-controls {
     display: flex;
     gap: 10px;
 }
-
 .vinyl-btn {
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
@@ -2426,18 +2033,11 @@ body {
                 transform 0.2s ease;
     font-size: 0.85rem;
 }
-
 .vinyl-btn:hover {
     background: var(--accent-pink);
     color: #fff;
     transform: scale(1.1);
 }
-
-
-/* ------------------------------------------------------------
-   24. EFFECTS (Ripple & Cursor Trail)
-   ------------------------------------------------------------ */
-
 .ripple {
     position: fixed;
     border-radius: 50%;
@@ -2450,7 +2050,6 @@ body {
     width: 40px;
     height: 40px;
 }
-
 @keyframes rippleAnim {
     0% {
         transform: translate(-50%, -50%) scale(0);
@@ -2461,7 +2060,6 @@ body {
         opacity: 0;
     }
 }
-
 .cursor-trail {
     position: fixed;
     width: 5px;
@@ -2474,7 +2072,6 @@ body {
                 0 0 12px rgba(232, 114, 154, 0.3);
     animation: trailAnim 0.8s ease-out forwards;
 }
-
 @keyframes trailAnim {
     0% {
         opacity: 1;
@@ -2485,124 +2082,91 @@ body {
         transform: scale(0);
     }
 }
-
-
-/* ------------------------------------------------------------
-   25. RESPONSIVE BREAKPOINTS
-   ------------------------------------------------------------ */
-
 @media (max-width: 768px) {
     .scratch-cards {
         flex-direction: column;
         align-items: center;
     }
-
     .scratch-card {
         width: 250px;
         height: 160px;
     }
-
     .scratch-canvas {
         width: 250px;
         height: 160px;
     }
-
     .typewriter-paper {
         padding: 1.5rem;
     }
-
     .station-gift {
         transform: scale(0.85);
     }
-
     .knot {
         width: 44px;
         height: 44px;
     }
-
     .section-title {
         font-size: 1.3rem;
     }
-
     .vinyl-controller {
         bottom: 15px;
         right: 15px;
     }
-
     .music-overlay-content {
         padding: 1.5rem;
         margin: 1rem;
     }
-
     .telephone-container {
         width: 90%;
     }
-
     .swing-container {
         width: 200px;
         height: 250px;
     }
-
     .polaroid-frame {
         width: 200px;
     }
-
     .camera-body-css {
         width: 170px;
         height: 120px;
     }
 }
-
 @media (max-width: 480px) {
     .intro-title {
         font-size: 3.5rem;
     }
-
     .section-title {
         font-size: 1.1rem;
     }
-
     .scratch-card {
         width: 220px;
         height: 140px;
     }
-
     .typewriter-paper {
         padding: 1.2rem;
         max-width: 95%;
     }
-
     .knot {
         width: 40px;
         height: 40px;
     }
-
     .gift-msg {
         width: 200px;
         font-size: 0.95rem;
         padding: 0.8rem 1rem;
     }
-
     .swing-container {
         width: 180px;
         height: 220px;
     }
-
     .camera-body-css {
         width: 150px;
         height: 110px;
     }
-
     .polaroid-frame {
         width: 180px;
     }
 }
-
-
-/* ============================================================
-   END OF STYLESHEET
-   ============================================================ */
-
 .premium-btn:hover {
     transform: translateY(-4px) scale(1.02);
     box-shadow: 0 12px 30px rgba(232, 114, 154, 0.4);
@@ -2625,7 +2189,6 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 20px 50px rgba(232, 114, 154, 0.25);
 }
-
 .garden-view::after {
     content: '';
     position: absolute;
@@ -2637,7 +2200,6 @@ body {
     pointer-events: none;
     z-index: 0;
 }
-
 .garden-final-msg {
     position: absolute;
     top: 50%;
@@ -2651,13 +2213,10 @@ body {
     width: 85%;
     max-width: 400px;
 }
-
 .garden-final-msg.show {
     opacity: 1;
     transform: translate(-50%, -50%) translateY(0);
 }
-
-/* Upgraded glassmorphism for glass elements */
 .knot-reveal,
 .hearts-reward,
 .stars-message {

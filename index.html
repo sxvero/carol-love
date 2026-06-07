@@ -12,7 +12,6 @@
 </head>
 <body>
 
-    <!-- ===== LOADING SCREEN ===== -->
     <div id="loading-screen">
         <div class="loader-content">
             <div class="loader-heart"><span class="heart-shape"></span></div>
@@ -21,24 +20,19 @@
         </div>
     </div>
 
-    <!-- ===== PROGRESS BAR ===== -->
     <div id="progress-bar"></div>
 
-    <!-- ===== PARTICLE CANVAS (petals + stars + birds) ===== -->
     <canvas id="particleCanvas"></canvas>
 
-    <!-- ===== AMBIENT ORBS ===== -->
     <div class="ambient-orb orb-1"></div>
     <div class="ambient-orb orb-2"></div>
     <div class="ambient-orb orb-3"></div>
 
-    <!-- ===== AUDIO ===== -->
     <audio id="audio-circles" src="circles.mp3" preload="auto"></audio>
     <audio id="audio-te-quiero" src="te-quiero.mp3" preload="auto"></audio>
     <audio id="audio-todo-cambio" src="todo-cambio.mp3" preload="auto"></audio>
     <audio id="audio-travis" src="travis.mp3" preload="auto"></audio>
 
-    <!-- ===== MUSIC OVERLAY (centered, full screen) ===== -->
     <div class="music-overlay" id="music-overlay">
         <div class="music-overlay-content">
             <div class="music-overlay-icon">
@@ -57,7 +51,6 @@
         </div>
     </div>
 
-    <!-- ===== VINYL CONTROLLER ===== -->
     <div class="vinyl-controller" id="vinyl-controller">
         <div class="vinyl-player-box">
             <div class="vinyl-arm" id="vinyl-arm"></div>
@@ -77,7 +70,6 @@
         </div>
     </div>
 
-    <!-- ===== INTRO SCREEN ===== -->
     <div class="intro-screen" id="intro-screen">
         <div class="intro-content">
             <p class="intro-pre">esto es para ti</p>
@@ -91,19 +83,15 @@
         </div>
     </div>
 
-    <!-- ===== CURTAINS ===== -->
     <div class="curtain-container" id="curtain-container" style="display: none;">
         <div class="curtain curtain-left" id="curtain-left"><div class="curtain-fold"></div></div>
         <div class="curtain curtain-right" id="curtain-right"><div class="curtain-fold"></div></div>
     </div>
 
-    <!-- ===== MAIN CONTENT ===== -->
     <div id="main-content" style="display: none;">
 
-        <!-- 0. Curtain scroll trigger -->
         <section id="scrolly-curtain" class="scroll-section" style="height: 150vh;"></section>
 
-        <!-- 1. RED THREAD OF DESTINY -->
         <section id="sec-thread" class="scroll-section" style="height: 400vh;">
             <div class="sticky-view thread-view">
                 <canvas id="threadCanvas"></canvas>
@@ -118,7 +106,6 @@
             </div>
         </section>
 
-        <!-- 2. BUBBLES -->
         <section id="sec-bubbles" class="scroll-section" style="height: 200vh;">
             <div class="sticky-view bubble-view">
                 <h2 class="section-title">Toca las burbujas</h2>
@@ -126,7 +113,6 @@
             </div>
         </section>
 
-        <!-- 3. SCRATCH CARDS -->
         <section id="sec-scratch" class="scroll-section" style="height: 180vh;">
             <div class="sticky-view scratch-view">
                 <h2 class="section-title">Desliza para descubrir</h2>
@@ -147,7 +133,6 @@
             </div>
         </section>
 
-        <!-- 4. CATCH HEARTS -->
         <section id="sec-hearts" class="scroll-section" style="height: 200vh;">
             <div class="sticky-view hearts-view">
                 <h2 class="section-title">Atrapa los corazones</h2>
@@ -159,7 +144,6 @@
             </div>
         </section>
 
-        <!-- 5. TYPEWRITER -->
         <section id="sec-typewriter" class="scroll-section" style="height: 220vh;">
             <div class="sticky-view typewriter-view">
                 <div class="typewriter-paper">
@@ -172,7 +156,6 @@
             </div>
         </section>
 
-        <!-- 6. STRING TELEPHONE -->
         <section id="sec-telephone" class="scroll-section" style="height: 180vh;">
             <div class="sticky-view telephone-view">
                 <h2 class="section-title">Un mensaje secreto</h2>
@@ -195,7 +178,6 @@
             </div>
         </section>
 
-        <!-- 7. STATIONS -->
         <section id="sec-stations" class="scroll-section" style="height: 500vh;">
             <div class="sticky-view stations-view">
                 <div class="station-path">
@@ -220,15 +202,14 @@
             </div>
         </section>
 
-        <!-- 8. TREE OF WISHES -->
         <section id="sec-tree" class="scroll-section" style="height: 300vh;">
             <div class="sticky-view tree-view">
                 <h2 class="section-title tree-hint">Mantén presionado para hacer florecer</h2>
                 <div class="tree-container" id="tree-container">
                     <svg id="tree-svg" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid meet">
-                        <!-- Zen Bonsai Trunk -->
+
                         <path class="tree-trunk bonsai-trunk" d="M180,480 C180,400 130,370 160,290 C175,250 215,240 230,210"/>
-                        <!-- Zen Branches -->
+
                         <path class="tree-branch b1" d="M160,290 C120,270 80,290 60,260"/>
                         <path class="tree-branch b2" d="M180,275 C230,240 270,270 300,250"/>
                         <path class="tree-branch b3" d="M200,240 C170,200 130,210 110,170"/>
@@ -245,7 +226,6 @@
             </div>
         </section>
 
-        <!-- 9. LLUVIA DE ESTRELLITAS -->
         <section id="sec-stars" class="scroll-section" style="height: 200vh;">
             <div class="sticky-view stars-view">
                 <h2 class="section-title stars-title">Toca la estrella fugaz</h2>
@@ -260,7 +240,6 @@
             </div>
         </section>
 
-        <!-- 10. COLUMPIO DE LOS SUEÑOS -->
         <section id="sec-swing" class="scroll-section" style="height: 200vh;">
             <div class="sticky-view swing-view">
                 <h2 class="section-title">Impulsa el columpio</h2>
@@ -283,7 +262,6 @@
             </div>
         </section>
 
-        <!-- 11. CARTA EN BOTELLA -->
         <section id="sec-bottle" class="scroll-section" style="height: 200vh;">
             <div class="sticky-view bottle-view">
                 <h2 class="section-title bottle-title">Un mensaje del mar</h2>
@@ -307,7 +285,6 @@
             </div>
         </section>
 
-        <!-- 12. JARDÍN SECRETO -->
         <section id="sec-garden" class="scroll-section" style="height: 400vh;">
             <div class="sticky-view garden-view">
                 <h2 class="section-title garden-title" id="garden-title">Mi jardín secreto</h2>
@@ -336,7 +313,6 @@
             </div>
         </section>
 
-        <!-- 13. POLAROID -->
         <section id="sec-polaroid" class="scroll-section" style="height: 200vh;">
             <div class="sticky-view polaroid-view">
                 <h2 class="section-title">Un recuerdo para ti</h2>
@@ -351,7 +327,7 @@
                 </div>
                 <div class="polaroid-frame" id="polaroid-frame">
                     <div class="polaroid-photo" id="polaroid-photo">
-                        <!-- Use bebe.jpg for the photo -->
+
                         <img src="bebe.jpg" alt="Bebe" class="polaroid-image" id="polaroid-image">
                     </div>
                     <p class="polaroid-msg">Mi recuerdo favorito siempre va a incluirte.</p>
@@ -359,7 +335,6 @@
             </div>
         </section>
 
-        <!-- FINAL SPACER -->
         <section style="height: 50vh;"></section>
 
     </div>
