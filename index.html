@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Para Carol</title>
+    <meta name="description" content="Un pequeño universo hecho solo para ti.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== LOADING SCREEN ===== -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="loader-heart"><span class="heart-shape"></span></div>
+            <p class="loader-text">Preparando algo especial para ti...</p>
+            <div class="loader-bar"><div class="loader-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- ===== PROGRESS BAR ===== -->
+    <div id="progress-bar"></div>
+
+    <!-- ===== PARTICLE CANVAS (petals + stars + birds) ===== -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- ===== AMBIENT ORBS ===== -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+
+    <!-- ===== AUDIO ===== -->
+    <audio id="audio-circles" src="circles.mp3" preload="auto"></audio>
+    <audio id="audio-te-quiero" src="te-quiero.mp3" preload="auto"></audio>
+    <audio id="audio-todo-cambio" src="todo-cambio.mp3" preload="auto"></audio>
+    <audio id="audio-travis" src="travis.mp3" preload="auto"></audio>
+
+    <!-- ===== MUSIC OVERLAY (centered, full screen) ===== -->
+    <div class="music-overlay" id="music-overlay">
+        <div class="music-overlay-content">
+            <div class="music-overlay-icon">
+                <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9 18V5l12-2v13"/>
+                    <circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+                </svg>
+            </div>
+            <h3 class="music-overlay-title" id="music-overlay-title"></h3>
+            <p class="music-overlay-msg" id="music-overlay-msg"></p>
+            <button class="music-overlay-close" id="music-overlay-close">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== VINYL CONTROLLER ===== -->
+    <div class="vinyl-controller" id="vinyl-controller">
+        <div class="vinyl-player-box">
+            <div class="vinyl-arm" id="vinyl-arm"></div>
+            <div class="vinyl-record" id="vinyl-record">
+                <div class="vinyl-grooves"></div>
+                <div class="vinyl-label" id="vinyl-label"></div>
+                <div class="vinyl-hole"></div>
+            </div>
+        </div>
+        <div class="vinyl-controls">
+            <button id="vinyl-play-btn" class="vinyl-btn" aria-label="Play">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            </button>
+            <button id="vinyl-next-btn" class="vinyl-btn" aria-label="Next">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="3,3 13,12 3,21"/><polygon points="13,3 23,12 13,21"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== INTRO SCREEN ===== -->
+    <div class="intro-screen" id="intro-screen">
+        <div class="intro-content">
+            <p class="intro-pre">esto es para ti</p>
+            <h1 class="intro-title">Para Carol</h1>
+            <p class="intro-sub">Un pequeño universo hecho solo para ti</p>
+            <button id="start-btn" class="premium-btn">
+                <span>Comenzar la Aventura</span>
+                <div class="btn-shimmer"></div>
+            </button>
+            <p class="scroll-hint" id="scroll-hint">Desliza y toca para descubrir...</p>
+        </div>
+    </div>
+
+    <!-- ===== CURTAINS ===== -->
+    <div class="curtain-container" id="curtain-container" style="display: none;">
+        <div class="curtain curtain-left" id="curtain-left"><div class="curtain-fold"></div></div>
+        <div class="curtain curtain-right" id="curtain-right"><div class="curtain-fold"></div></div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div id="main-content" style="display: none;">
+
+        <!-- 0. Curtain scroll trigger -->
+        <section id="scrolly-curtain" class="scroll-section" style="height: 150vh;"></section>
+
+        <!-- 1. RED THREAD OF DESTINY -->
+        <section id="sec-thread" class="scroll-section" style="height: 400vh;">
+            <div class="sticky-view thread-view">
+                <canvas id="threadCanvas"></canvas>
+                <h2 class="thread-title" id="thread-title">Nuestro <span class="accent">Hilo Rojo</span></h2>
+                <div class="thread-knots">
+                    <div class="knot" data-msg="La primera vez que te vi" id="knot-1"><span class="knot-inner"></span></div>
+                    <div class="knot" data-msg="Nuestra primera conversación" id="knot-2"><span class="knot-inner"></span></div>
+                    <div class="knot" data-msg="Cuando supe que eras diferente" id="knot-3"><span class="knot-inner"></span></div>
+                    <div class="knot" data-msg="El momento que lo cambió todo" id="knot-4"><span class="knot-inner"></span></div>
+                </div>
+                <div class="knot-reveal" id="knot-reveal"></div>
+            </div>
+        </section>
+
+        <!-- 2. BUBBLES -->
+        <section id="sec-bubbles" class="scroll-section" style="height: 200vh;">
+            <div class="sticky-view bubble-view">
+                <h2 class="section-title">Toca las burbujas</h2>
+                <div class="bubble-container" id="bubble-container"></div>
+            </div>
+        </section>
+
+        <!-- 3. SCRATCH CARDS -->
+        <section id="sec-scratch" class="scroll-section" style="height: 180vh;">
+            <div class="sticky-view scratch-view">
+                <h2 class="section-title">Desliza para descubrir</h2>
+                <div class="scratch-cards">
+                    <div class="scratch-card" id="scratch-1">
+                        <div class="scratch-hidden">Eres la persona más bonita que conozco</div>
+                        <canvas class="scratch-canvas" width="280" height="180"></canvas>
+                    </div>
+                    <div class="scratch-card" id="scratch-2">
+                        <div class="scratch-hidden">Incluso enojada, sigues siendo perfecta</div>
+                        <canvas class="scratch-canvas" width="280" height="180"></canvas>
+                    </div>
+                    <div class="scratch-card" id="scratch-3">
+                        <div class="scratch-hidden">Me gusta absolutamente todo de ti</div>
+                        <canvas class="scratch-canvas" width="280" height="180"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. CATCH HEARTS -->
+        <section id="sec-hearts" class="scroll-section" style="height: 200vh;">
+            <div class="sticky-view hearts-view">
+                <h2 class="section-title">Atrapa los corazones</h2>
+                <div class="hearts-arena" id="hearts-arena"></div>
+                <div class="hearts-score" id="hearts-score">0 / 5</div>
+                <div class="hearts-reward" id="hearts-reward">
+                    <p>Cada latido lleva tu nombre, Monita.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. TYPEWRITER -->
+        <section id="sec-typewriter" class="scroll-section" style="height: 220vh;">
+            <div class="sticky-view typewriter-view">
+                <div class="typewriter-paper">
+                    <p class="typewriter-text" id="typewriter-text"></p>
+                    <span class="typewriter-cursor">|</span>
+                </div>
+                <button class="tap-key" id="tap-key">
+                    <span>Toca aquí para escribir</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 6. STRING TELEPHONE -->
+        <section id="sec-telephone" class="scroll-section" style="height: 180vh;">
+            <div class="sticky-view telephone-view">
+                <h2 class="section-title">Un mensaje secreto</h2>
+                <div class="telephone-container">
+                    <div class="cup cup-left" id="cup-left">
+                        <div class="cup-body"></div>
+                        <div class="cup-label">Toca aquí</div>
+                    </div>
+                    <svg class="phone-string" id="phone-string" viewBox="0 0 400 100" preserveAspectRatio="none">
+                        <path class="string-path" d="M0,50 Q100,20 200,50 Q300,80 400,50" fill="none" stroke-width="2"/>
+                        <circle class="string-wave" cx="0" cy="50" r="4" id="string-wave"/>
+                    </svg>
+                    <div class="cup cup-right">
+                        <div class="cup-body"></div>
+                    </div>
+                </div>
+                <div class="phone-message" id="phone-message">
+                    <p>Psst... solo quería recordarte que eres lo más bonito que me ha pasado.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. STATIONS -->
+        <section id="sec-stations" class="scroll-section" style="height: 500vh;">
+            <div class="sticky-view stations-view">
+                <div class="station-path">
+                    <div class="station-line" id="station-line"></div>
+                </div>
+                <div class="station-gift" data-index="0" style="top: 20%; left: 15%;">
+                    <div class="gift-box-css"><div class="gift-ribbon"></div></div>
+                    <div class="gift-msg">Admiro cada detalle de ti: la luz que irradias sin darte cuenta.</div>
+                </div>
+                <div class="station-gift" data-index="1" style="top: 45%; left: 65%;">
+                    <div class="gift-box-css"><div class="gift-ribbon"></div></div>
+                    <div class="gift-msg">Cuando el mundo hace ruido, tú eres mi lugar tranquilo.</div>
+                </div>
+                <div class="station-gift" data-index="2" style="top: 65%; left: 25%;">
+                    <div class="gift-box-css"><div class="gift-ribbon"></div></div>
+                    <div class="gift-msg">No quería escribirte algo común, porque lo que siento no tiene nada de ordinario.</div>
+                </div>
+                <div class="station-gift" data-index="3" style="top: 85%; left: 70%;">
+                    <div class="gift-box-css"><div class="gift-ribbon"></div></div>
+                    <div class="gift-msg">Eres mi paz, mi refugio y lo que nunca quiero dejar de tener.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. TREE OF WISHES -->
+        <section id="sec-tree" class="scroll-section" style="height: 300vh;">
+            <div class="sticky-view tree-view">
+                <h2 class="section-title tree-hint">Mantén presionado para hacer florecer</h2>
+                <div class="tree-container" id="tree-container">
+                    <svg id="tree-svg" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid meet">
+                        <!-- Zen Bonsai Trunk -->
+                        <path class="tree-trunk bonsai-trunk" d="M180,480 C180,400 130,370 160,290 C175,250 215,240 230,210"/>
+                        <!-- Zen Branches -->
+                        <path class="tree-branch b1" d="M160,290 C120,270 80,290 60,260"/>
+                        <path class="tree-branch b2" d="M180,275 C230,240 270,270 300,250"/>
+                        <path class="tree-branch b3" d="M200,240 C170,200 130,210 110,170"/>
+                        <path class="tree-branch b4" d="M230,210 C270,180 300,190 330,160"/>
+                        <path class="tree-branch b5" d="M220,220 C240,190 250,190 260,160"/>
+                    </svg>
+                    <div class="tree-leaves" id="tree-leaves"></div>
+                    <div class="tree-hold-ring" id="tree-hold-ring"><span class="hold-icon"></span></div>
+                </div>
+                <div class="tree-final-msg" id="tree-final-msg">
+                    <h2>Gracias por ser la casualidad<br>más bonita de mi vida.</h2>
+                    <p class="final-signature">Con todo mi cariño, siempre.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. LLUVIA DE ESTRELLITAS -->
+        <section id="sec-stars" class="scroll-section" style="height: 200vh;">
+            <div class="sticky-view stars-view">
+                <h2 class="section-title stars-title">Toca la estrella fugaz</h2>
+                <div class="stars-sky" id="stars-sky"></div>
+                <div class="shooting-star" id="shooting-star">
+                    <span class="star-body"></span>
+                    <span class="star-trail"></span>
+                </div>
+                <div class="stars-message" id="stars-message">
+                    <p>Pedí un deseo... y eras tú.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. COLUMPIO DE LOS SUEÑOS -->
+        <section id="sec-swing" class="scroll-section" style="height: 200vh;">
+            <div class="sticky-view swing-view">
+                <h2 class="section-title">Impulsa el columpio</h2>
+                <div class="swing-container">
+                    <div class="swing-frame">
+                        <div class="swing-post-left"></div>
+                        <div class="swing-bar"></div>
+                        <div class="swing-post-right"></div>
+                    </div>
+                    <div class="swing-seat-wrapper" id="swing-seat-wrapper">
+                        <div class="swing-rope swing-rope-left"></div>
+                        <div class="swing-rope swing-rope-right"></div>
+                        <div class="swing-seat"></div>
+                    </div>
+                </div>
+                <div class="swing-words" id="swing-words"></div>
+                <button class="tap-key swing-btn" id="swing-push-btn">
+                    <span>Toca para impulsar</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 11. CARTA EN BOTELLA -->
+        <section id="sec-bottle" class="scroll-section" style="height: 200vh;">
+            <div class="sticky-view bottle-view">
+                <h2 class="section-title bottle-title">Un mensaje del mar</h2>
+                <div class="ocean">
+                    <div class="wave wave-1"></div>
+                    <div class="wave wave-2"></div>
+                    <div class="wave wave-3"></div>
+                </div>
+                <div class="bottle-float" id="bottle">
+                    <div class="bottle-body-css">
+                        <div class="bottle-neck-css"></div>
+                        <div class="bottle-cork-css"></div>
+                    </div>
+                    <div class="bottle-label">Toca la botella</div>
+                </div>
+                <div class="parchment" id="parchment">
+                    <div class="parchment-inner">
+                        <p class="parchment-text">Si pudiera enviar un mensaje al mar, solo diría una cosa: gracias por existir.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. JARDÍN SECRETO -->
+        <section id="sec-garden" class="scroll-section" style="height: 400vh;">
+            <div class="sticky-view garden-view">
+                <h2 class="section-title garden-title" id="garden-title">Mi jardín secreto</h2>
+                <div class="garden-ground" id="garden-ground">
+                    <div class="garden-stem stem-1" data-threshold="0.1">
+                        <div class="garden-flower-css flower-pink"></div>
+                    </div>
+                    <div class="garden-stem stem-2" data-threshold="0.2">
+                        <div class="garden-flower-css flower-white"></div>
+                    </div>
+                    <div class="garden-stem stem-3" data-threshold="0.35">
+                        <div class="garden-flower-css flower-rose"></div>
+                    </div>
+                    <div class="garden-stem stem-4" data-threshold="0.5">
+                        <div class="garden-flower-css flower-pink"></div>
+                    </div>
+                    <div class="garden-stem stem-5" data-threshold="0.65">
+                        <div class="garden-flower-css flower-white"></div>
+                    </div>
+                    <div class="garden-butterfly" data-threshold="0.4" id="butterfly-1"></div>
+                    <div class="garden-butterfly" data-threshold="0.7" id="butterfly-2"></div>
+                </div>
+                <div class="garden-final-msg" id="garden-final-msg">
+                    <p>Así se ve mi mundo desde que estás en él.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. POLAROID -->
+        <section id="sec-polaroid" class="scroll-section" style="height: 200vh;">
+            <div class="sticky-view polaroid-view">
+                <h2 class="section-title">Un recuerdo para ti</h2>
+                <div class="polaroid-camera" id="polaroid-camera">
+                    <div class="camera-body-css">
+                        <div class="camera-lens"></div>
+                        <div class="camera-flash"></div>
+                        <button class="camera-btn" id="camera-btn">
+                            <span class="camera-btn-inner"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="polaroid-frame" id="polaroid-frame">
+                    <div class="polaroid-photo" id="polaroid-photo">
+                        <!-- Use bebe.jpg for the photo -->
+                        <img src="bebe.jpg" alt="Bebe" class="polaroid-image" id="polaroid-image">
+                    </div>
+                    <p class="polaroid-msg">Mi recuerdo favorito siempre va a incluirte.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL SPACER -->
+        <section style="height: 50vh;"></section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
